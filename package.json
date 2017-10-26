@@ -1,0 +1,24 @@
+{
+  "name": "notifications-test",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
+  "license": "",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "test": "node ./node_modules/jest/bin/jest.js --watch"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "@expo/samples": "2.1.1",
+    "expo": "^22.0.0",
+    "react": "16.0.0-beta.5",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-22.0.1.tar.gz",
+    "react-navigation": "^1.0.0-beta.15"
+  },
+  "devDependencies": {
+    "jest-expo": "^22.0.0"
+  }
+}
