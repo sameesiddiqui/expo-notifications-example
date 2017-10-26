@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
+import { WebBrowser } from 'expo'
 import BodyText from '../components/BodyText'
 import Colors from '../constants/Colors'
 
@@ -13,7 +14,10 @@ export default class ChecklistScreen extends React.Component {
     title: 'Notifications Checklist',
   }
 
-  render() {
+  render () {
+    const localNotifUrl = 'https://docs.expo.io/versions/latest/sdk/notifications.html#local-notifications'
+    const pushNotifUrl = 'https://docs.expo.io/versions/latest/guides/push-notifications.html'
+
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
@@ -22,7 +26,7 @@ export default class ChecklistScreen extends React.Component {
           </BodyText>
 
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => this._openLink(localNotifUrl)}
             style={{marginTop: 15}}>
             <Text style={styles.link}>Local Notifications:</Text>
           </TouchableOpacity>
@@ -35,7 +39,7 @@ export default class ChecklistScreen extends React.Component {
           </BodyText>
 
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => this._openLink(pushNotifUrl)}
             style={{marginTop: 15}}>
             <Text style={styles.link}>Push Notifications:</Text>
           </TouchableOpacity>
@@ -48,6 +52,10 @@ export default class ChecklistScreen extends React.Component {
         </View>
       </View>
     )
+  }
+
+  async _openLink (url) {
+    await WebBrowser.openBrowserAsync(url)
   }
 }
 
