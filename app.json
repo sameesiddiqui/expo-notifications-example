@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "notifications-test",
-    "description": "No description",
-    "slug": "notifications-test",
+    "name": "expo-notifications",
+    "description": "Local and push notifications using expo apis",
+    "slug": "expo-notifications",
     "privacy": "public",
     "sdkVersion": "22.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
+    "primaryColor": "#2188FF",
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",

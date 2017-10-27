@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,8 +8,8 @@ import {
   TextInput
 } from 'react-native';
 import { WebBrowser, Notifications } from 'expo';
-
-import { MonoText } from '../components/StyledText';
+import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync'
+import Colors from '../constants/Colors'
 
 export default class NotificationsScreen extends React.Component {
   constructor (props) {
@@ -24,6 +22,7 @@ export default class NotificationsScreen extends React.Component {
       }
     }
     this._localNotification = this._localNotification.bind(this)
+    this._pushNotification = this._pushNotification.bind(this)
   }
 
 
@@ -42,19 +41,19 @@ export default class NotificationsScreen extends React.Component {
           <View style={styles.container}>
             <TextInput
               style={styles.textInput}
-              placeholder={'title'}
+              placeholder={'Enter a title'}
               onChangeText={(text) => {this.setState({title: text})}}
             />
 
             <TextInput
               style={styles.textInput}
-              placeholder={'body'}
+              placeholder={'and body text'}
               onChangeText={(text) => {this.setState({body: text})}}
             />
 
             <TextInput
               style={styles.textInput}
-              placeholder={'data'}
+              placeholder={'and data if you want'}
               onChangeText={this._setDataValue}
             />
 
@@ -62,7 +61,15 @@ export default class NotificationsScreen extends React.Component {
               onPress={this._localNotification}
               style={styles.button}>
               <Text style={styles.text}>
-                Open a local notification!
+                Send a local notification in 5 seconds!
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={this._pushNotification}
+              style={styles.button}>
+              <Text style={styles.text}>
+                Send a push notification!
               </Text>
             </TouchableOpacity>
           </View>
@@ -73,14 +80,15 @@ export default class NotificationsScreen extends React.Component {
   }
 
   _setDataValue = (dataValue) => {
-    console.log(dataValue)
-    let data = this.state.data
-    data.thisIsYourData = dataValue
-    this.setState({data})
+    this.setState({
+      data: {
+        thisIsYourData: dataValue
+      }
+    })
   }
 
   async _localNotification () {
-    let notification = {
+    const notification = {
       title: this.state.title,
       body: this.state.body,
       data: this.state.data,
@@ -91,8 +99,23 @@ export default class NotificationsScreen extends React.Component {
         sound: true
       }
     }
-    let id = await Notifications.presentLocalNotificationAsync(notification)
-    console.log(id)
+
+    const scheduleOptions = {
+      time: Date.now() + 5000
+    }
+
+    Notifications.scheduleLocalNotificationAsync(
+      notification,
+      scheduleOptions
+    )
+  }
+
+  _pushNotification () {
+    registerForPushNotificationsAsync(
+      this.state.title,
+      this.state.body,
+      this.state.data
+    )
   }
 
 }
@@ -100,22 +123,25 @@ export default class NotificationsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.offWhite,
   },
   contentContainer: {
     paddingTop: 30,
   },
   textInput: {
     height: 60,
-    borderColor: '#000',
-    borderWidth: 1,
-    // padding: 15
+    margin: 15
   },
   button: {
     backgroundColor: '#2188FF',
-    padding: 15
+    padding: 15,
+    alignItems: 'center',
+    borderRadius: 10,
+    margin: 15
   },
   text: {
-    alignItems: 'center'
+    alignItems: 'center',
+    color: Colors.offWhite,
+    fontSize: 16
   }
 })

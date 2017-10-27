@@ -1,8 +1,8 @@
 {
-  "name": "notifications-test",
+  "name": "expo-notifications",
   "version": "0.0.0",
-  "description": "Hello Expo!",
-  "author": null,
+  "description": "Local and push notifications using expo apis",
+  "author": "Samee Siddiqui",
   "license": "",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
