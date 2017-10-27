@@ -22,7 +22,7 @@ export default class ChecklistScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.contentContainer}>
           <BodyText>
-            For in depth guides, check out the expo docs for notifications.
+            For in depth guides and full parameter lists check out the expo docs.
           </BodyText>
 
           <TouchableOpacity
@@ -32,9 +32,9 @@ export default class ChecklistScreen extends React.Component {
           </TouchableOpacity>
 
           <BodyText>
-            1. Create notification object{'\n'}
-            2. Create scheduling object{'\n'}
-            3. iOS only: ask for notification permissions{'\n'}
+            1. Create your notification object (title and body are required){'\n'}
+            2. Create scheduling object (if you want to send it in the future){'\n'}
+            3. iOS only: ask for permission to send notifications{'\n'}
             4. iOS only: set up listener to handle the notification{'\n'}
           </BodyText>
 
@@ -45,9 +45,9 @@ export default class ChecklistScreen extends React.Component {
           </TouchableOpacity>
 
           <BodyText>
-            1. Get the users push token{'\n'}
+            1. Get the unique token that identifies the device (use Notifications.getExpoPushTokenAsync){'\n'}
             2. Send the push notification using the expo push api{'\n'}
-            3. Handle the push notification being received or clicked{'\n'}
+            3. Respond to the notification being received or selected by the user{'\n'}
           </BodyText>
         </View>
       </View>
