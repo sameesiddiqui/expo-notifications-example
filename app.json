@@ -10,9 +10,9 @@
     "primaryColor": "#2188FF",
     "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/images/icon.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#2188FF"
     },
     "packagerOpts": {
       "assetExts": ["ttf"]
