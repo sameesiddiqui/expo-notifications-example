@@ -23,7 +23,7 @@ const RootStackNavigator = StackNavigator(
 export default class RootNavigator extends React.Component {
   componentDidMount() {
     this.getiOSNotificationPermission()
-    this._notificationSubscription = this._listenForNotifications();
+    // this._notificationSubscription = this._listenForNotifications();
   }
 
   componentWillUnmount() {
@@ -40,15 +40,11 @@ export default class RootNavigator extends React.Component {
     if (status !== 'granted') {
       return
     }
-  }
-
-  _listenForNotifications() {
-    return Notifications.addListener(
-      this._handleNotification
-    )
+    this._notificationSubscription = Notifications.addListener(this._handleNotification)
   }
 
   _handleNotification = ({ origin, data, remote }) => {
+    console.log(remote)
     let type = remote ? 'Push' : 'Local'
     let info = `${type} notification ${origin} with data: ${JSON.stringify(data)}`
     setTimeout(() => Alert.alert('Notification!', info), 500)

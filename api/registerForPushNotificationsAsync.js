@@ -1,8 +1,8 @@
 import { Notifications } from 'expo'
 
 // Example server, implemented in Rails: https://git.io/vKHKv
-// const PUSH_ENDPOINT = 'https://expo-push-server.herokuapp.com/tokens';
-// const PUSH_ENDPOINT = 'http://5acf2105.ngrok.io';
+// const PUSH_ENDPOINT = 'https://expo-push-server.herokuapp.com/tokens'
+// const PUSH_ENDPOINT = 'http://5acf2105.ngrok.io'
 const PUSH_ENDPOINT = 'https://expo.io/--/api/v2/push/send'
 
 export default (async function registerForPushNotificationsAsync (title, body, data) {

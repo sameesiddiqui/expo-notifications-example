@@ -13,6 +13,7 @@ export default class CodeScreen extends React.Component {
       <ScrollView style={styles.container}>
         <View style={{margin: 15}}>
           {this._localInstructions()}
+          {this._pushInstructions()}
         </View>
       </ScrollView>
     );
@@ -33,8 +34,11 @@ export default class CodeScreen extends React.Component {
 
     return (
       <View>
-        <Text>
-          Creating a notification object is easy:
+        <Text style={{fontSize: 20}}>
+          Scheduling local notifications
+        </Text>
+        <Text style={{marginTop: 10}}>
+          Creating a local notification object is easy:
         </Text>
 
         <View style={styles.codeBlock}>
@@ -53,6 +57,76 @@ export default class CodeScreen extends React.Component {
             {`\n\n`}
             {'Notifications.scheduleLocalNotificationAsync(' + '\n\t' + 'notification' +
             '\n\t' + 'scheduleOptions\n)'}
+          </Text>
+        </View>
+      </View>
+    )
+  }
+
+  _pushInstructions = () => {
+    const fetchObj = `{
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: {
+          value: token,
+        },
+        user: {
+          username: 'Steve Jobs',
+        }
+      })
+    }`
+
+    const notification = `{
+      to: usersPushToken,
+      sound: 'default',
+      body: 'This is a test notification',
+      data: { withSome: 'data' },
+    }`
+
+    return (
+      <View>
+        <Text style={{marginTop: 20, fontSize: 20}}>
+          Push notification process
+        </Text>
+        <Text style={{marginTop: 10}}>
+          Getting push notification tokens is simple too:
+        </Text>
+
+        <View style={styles.codeBlock}>
+          <Text style={styles.code}>
+            let token = await Notifications.getExpoPushTokenAsync()
+          </Text>
+        </View>
+
+        <Text>
+          Send the token to your server so you know the device to send the notification to.
+        </Text>
+
+        <View style={styles.codeBlock}>
+          <Text style={styles.code}>
+            {'const yourServer = https://reallyCoolSite.com/push_token'}
+            {`\n\n`}
+            {'fetch(yourServer, ' + fetchObj + ')'}
+          </Text>
+        </View>
+
+        <Text>
+          Lastly, use the token you stored and send a notification from your server code!
+        </Text>
+
+        <View style={styles.codeBlock}>
+          <Text style={styles.code}>
+            {"import Expo from 'expo-server-sdk'"}
+            {`\n`}
+            {'let expo = new Expo()'}
+            {`\n\n`}
+            {'let notification = ' + notification}
+            {`\n`}
+            {'expo.sendPushNotificationsAsync(notification)'}
           </Text>
         </View>
       </View>

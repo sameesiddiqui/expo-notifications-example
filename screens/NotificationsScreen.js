@@ -124,6 +124,7 @@ export default class NotificationsScreen extends React.Component {
       this.state.body,
       this.state.data
     )
+    console.log(this.state.title, this.state.body, this.state.data)
   }
 
 }

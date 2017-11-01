@@ -11,7 +11,7 @@ import Colors from '../constants/Colors'
 
 export default class ChecklistScreen extends React.Component {
   static navigationOptions = {
-    title: 'Notifications Checklist',
+    title: 'Checklist',
   }
 
   render () {
